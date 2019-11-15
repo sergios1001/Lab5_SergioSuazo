@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
@@ -21,6 +22,7 @@ public class Clash_Royale extends javax.swing.JFrame {
 
     static ArrayList<Usuario> users=new ArrayList();
     static ArrayList<Clan> clan=new ArrayList();
+    static Clan clan_actual;
     static Usuario usuario_actual;
     static boolean login=false;
     static boolean tiene_clan=false;
@@ -112,12 +114,15 @@ public class Clash_Royale extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         bt_newClan = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jl_miembros = new javax.swing.JList<>();
+        tf_clan = new javax.swing.JTextField();
+        jLabel23 = new javax.swing.JLabel();
+        tf_lider = new javax.swing.JTextField();
+        jPanel3 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
 
         NuevoUser.setTitle("Nuevo Usuario");
 
@@ -457,6 +462,11 @@ public class Clash_Royale extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jl_clan);
 
         bt_join.setText("Unirse al Clan");
+        bt_join.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_joinMouseClicked(evt);
+            }
+        });
 
         jLabel17.setText("Quieres crear tu propio clan? Hazlo aqui:");
 
@@ -508,13 +518,13 @@ public class Clash_Royale extends javax.swing.JFrame {
 
         tp_tabs.addTab("Unirse a un Clan", jPanel4);
 
-        jScrollPane3.setViewportView(jTextPane1);
-
         jLabel18.setText("Clan: ");
 
         jLabel19.setText("Miembros: ");
 
         jScrollPane4.setViewportView(jl_miembros);
+
+        jLabel23.setText("Lider del Clan: ");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -523,29 +533,63 @@ public class Clash_Royale extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel18)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel19)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(413, Short.MAX_VALUE))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel23)
+                            .addComponent(jLabel18))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tf_clan, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+                            .addComponent(tf_lider))))
+                .addContainerGap(354, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(47, 47, 47)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                    .addComponent(tf_clan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel23)
+                    .addComponent(tf_lider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
                 .addComponent(jLabel19)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(117, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
         tp_tabs.addTab("Mi Clan", jPanel5);
+
+        jButton1.setText("Cerrar sesion");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(200, 200, 200)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(225, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(129, 129, 129)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(211, Short.MAX_VALUE))
+        );
+
+        tp_tabs.addTab("Logout", jPanel3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -594,6 +638,13 @@ public class Clash_Royale extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this,"Bienvenido " +usuario);
             usuario_actual=users.get(pos);
             tp_tabs.setEnabled(login);
+            DefaultListModel p= (DefaultListModel) jl_clan.getModel();
+            for (int i = 0; i < clan.size(); i++) {
+                p.addElement(clan.get(i));
+            }
+            jl_clan.setModel(p);
+            tf_usuario.setText("");
+            pf_password.setText("");
         }
         else
         {
@@ -779,8 +830,59 @@ public class Clash_Royale extends javax.swing.JFrame {
         cb_tipo.setSelectedItem(0);
         jd_fechaCreacion.setDate(new Date());
         tiene_clan=true;
+        DefaultListModel p= (DefaultListModel) jl_miembros.getModel();
+        for (int j = 0; j < c.getMiembros().size(); j++) 
+        {
+            p.addElement(c.getMiembros().get(j).getNombre());
+        }
+        jl_miembros.setModel(p);
+        tf_clan.setText(c.getNombre());
+        tf_lider.setText(c.getLider());
         
     }//GEN-LAST:event_bt_addClanMouseClicked
+
+    private void bt_joinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_joinMouseClicked
+        // TODO add your handling code here:
+        if(tiene_clan)
+        {
+            JOptionPane.showMessageDialog(this, "El usuario ya es parte de un clan");
+        }
+        else
+        {
+            if(jl_clan.getSelectedIndex()>=0)
+            {
+                for (int i = 0; i < clan.size(); i++) 
+                {
+                    if(jl_clan.getSelectedValue().equals(clan.get(i).getNombre()))
+                    {
+                        ArrayList<Usuario> u=clan_actual.getMiembros();
+                        u.add(usuario_actual);
+                        clan_actual.setMiembros(u);
+                        tiene_clan=true;
+                        DefaultListModel p= (DefaultListModel) jl_miembros.getModel();
+                        for (int j = 0; j < clan.get(i).getMiembros().size(); j++) {
+                            p.addElement(clan.get(i).getMiembros().get(j).getNombre());
+                        }
+                        jl_miembros.setModel(p);
+                        tf_clan.setText(clan_actual.getNombre());
+                        tf_lider.setText(clan_actual.getLider());
+                    }
+                }
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(this, "No se selecciono un clan");
+            }
+        }
+    }//GEN-LAST:event_bt_joinMouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        tp_tabs.setEnabledAt(1, false);
+        tp_tabs.setEnabledAt(2, false);
+        tp_tabs.setEnabledAt(3, false);
+        tp_tabs.setEnabledAt(4, false);
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -830,6 +932,7 @@ public class Clash_Royale extends javax.swing.JFrame {
     private javax.swing.JButton bt_newClan;
     private javax.swing.JComboBox<String> cb_carta;
     private javax.swing.JComboBox<String> cb_tipo;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -845,6 +948,7 @@ public class Clash_Royale extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -854,13 +958,12 @@ public class Clash_Royale extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTextPane jTextPane1;
     private com.toedter.calendar.JDateChooser jd_fecha;
     private com.toedter.calendar.JDateChooser jd_fechaCreacion;
     private javax.swing.JList<String> jl_clan;
@@ -871,7 +974,9 @@ public class Clash_Royale extends javax.swing.JFrame {
     private javax.swing.JSpinner sp_mazo;
     private javax.swing.JSpinner sp_vida;
     private javax.swing.JTextField tf_apellido;
+    private javax.swing.JTextField tf_clan;
     private javax.swing.JTextField tf_contraN;
+    private javax.swing.JTextField tf_lider;
     private javax.swing.JTextField tf_nombreClan;
     private javax.swing.JTextField tf_nombreN;
     private javax.swing.JTextField tf_nombrecarta;

@@ -38,6 +38,11 @@ public class Carta {
         this.vida = vida;
     }
 
+    @Override
+    public String toString() {
+        return nombre;
+    }
+
 
     
 }

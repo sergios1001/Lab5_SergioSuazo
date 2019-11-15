@@ -61,7 +61,7 @@ public class Clan {
 
     @Override
     public String toString() {
-        return "Clan{" + "nombre=" + nombre + ", tipo=" + tipo + ", lider=" + lider + ", fecha=" + fecha + ", miembros=" + miembros + '}';
+        return "Clan "+nombre;
     }
     
     

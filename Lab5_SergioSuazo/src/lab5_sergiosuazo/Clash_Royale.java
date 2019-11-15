@@ -638,7 +638,7 @@ public class Clash_Royale extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this,"Bienvenido " +usuario);
             usuario_actual=users.get(pos);
             tp_tabs.setEnabled(login);
-            DefaultListModel p= (DefaultListModel) jl_clan.getModel();
+            DefaultListModel p= new DefaultListModel() ;
             for (int i = 0; i < clan.size(); i++) {
                 p.addElement(clan.get(i));
             }

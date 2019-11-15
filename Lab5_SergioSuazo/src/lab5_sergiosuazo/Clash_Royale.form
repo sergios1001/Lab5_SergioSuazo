@@ -254,6 +254,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Crear Clan"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="bt_addClanMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -699,6 +702,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Crear Clan"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="bt_newClanMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

@@ -20,8 +20,10 @@ import javax.swing.tree.DefaultTreeModel;
 public class Clash_Royale extends javax.swing.JFrame {
 
     static ArrayList<Usuario> users=new ArrayList();
+    static ArrayList<Clan> clan=new ArrayList();
     static Usuario usuario_actual;
     static boolean login=false;
+    static boolean tiene_clan=false;
     static Carta carta_agregar;
     /**
      * Creates new form Clash_Royale
@@ -223,6 +225,11 @@ public class Clash_Royale extends javax.swing.JFrame {
         cb_tipo.setToolTipText("");
 
         bt_addClan.setText("Crear Clan");
+        bt_addClan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_addClanMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout NuevoClanLayout = new javax.swing.GroupLayout(NuevoClan.getContentPane());
         NuevoClan.getContentPane().setLayout(NuevoClanLayout);
@@ -454,6 +461,11 @@ public class Clash_Royale extends javax.swing.JFrame {
         jLabel17.setText("Quieres crear tu propio clan? Hazlo aqui:");
 
         bt_newClan.setText("Crear Clan");
+        bt_newClan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_newClanMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -732,6 +744,43 @@ public class Clash_Royale extends javax.swing.JFrame {
         }
             modeloArbol.reload();
     }//GEN-LAST:event_bt_adicionarMouseClicked
+
+    private void bt_newClanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_newClanMouseClicked
+        // TODO add your handling code here:
+        if(tiene_clan)
+        {
+            JOptionPane.showMessageDialog(this, "El usuario ya es parte de un clan");
+        }
+        else
+        {
+            
+            NuevoClan.pack();
+            NuevoClan.setVisible(true); 
+            
+        }
+    }//GEN-LAST:event_bt_newClanMouseClicked
+
+    private void bt_addClanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_addClanMouseClicked
+        // TODO add your handling code here:
+        String nombre,tipo,lider;
+        Date fecha;
+        nombre=tf_nombreClan.getText();
+        tipo=cb_tipo.getSelectedItem().toString();
+        fecha=jd_fechaCreacion.getDate();
+        lider=usuario_actual.getNombre();
+        Clan c=new Clan(nombre,tipo,lider,fecha);
+        clan.add(c);
+        ArrayList<Usuario> miembros=new ArrayList();
+        miembros.add(usuario_actual);
+        c.setMiembros(miembros);
+        JOptionPane.showMessageDialog(this, "Se creo el Clan con exito");
+        NuevoClan.setVisible(false);
+        tf_nombreClan.setText("");
+        cb_tipo.setSelectedItem(0);
+        jd_fechaCreacion.setDate(new Date());
+        tiene_clan=true;
+        
+    }//GEN-LAST:event_bt_addClanMouseClicked
 
     /**
      * @param args the command line arguments

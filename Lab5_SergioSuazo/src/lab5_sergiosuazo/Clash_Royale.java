@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
@@ -20,6 +22,7 @@ public class Clash_Royale extends javax.swing.JFrame {
     static ArrayList<Usuario> users=new ArrayList();
     static Usuario usuario_actual;
     static boolean login=false;
+    static Carta carta_agregar;
     /**
      * Creates new form Clash_Royale
      */
@@ -27,6 +30,21 @@ public class Clash_Royale extends javax.swing.JFrame {
         initComponents();
         tp_tabs.setEnabled(login);
         tp_tabs.setEnabledAt(1, true);
+        //usuario de prueba
+        Usuario n=new Usuario("sergio","suazo","sergios1001","12345",21,Color.BLUE,new Date());
+        users.add(n);
+        usuario_actual=n;
+        ArrayList<Mazo> mazo=new ArrayList();
+        ArrayList<Carta> m1=new ArrayList();
+        ArrayList<Carta> m2=new ArrayList();
+        ArrayList<Carta> m3=new ArrayList();  
+        mazo.add(new Mazo());
+        mazo.add(new Mazo());
+        mazo.add(new Mazo());
+        ((Mazo)mazo.get(0)).setCarta(m1);
+        ((Mazo)mazo.get(1)).setCarta(m2);
+        ((Mazo)mazo.get(2)).setCarta(m3);
+        usuario_actual.setMazo(mazo);
     }
 
     /**
@@ -351,6 +369,9 @@ public class Clash_Royale extends javax.swing.JFrame {
 
         jLabel9.setText("Asignar al Mazo: ");
 
+        sp_mazo.setModel(new javax.swing.SpinnerNumberModel(0, 0, 2, 1));
+        sp_mazo.setToolTipText("");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -376,9 +397,9 @@ public class Clash_Royale extends javax.swing.JFrame {
                             .addComponent(jLabel9))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(sp_dano, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+                            .addComponent(sp_dano)
                             .addComponent(sp_vida)
-                            .addComponent(sp_mazo))))
+                            .addComponent(sp_mazo, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE))))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -536,7 +557,7 @@ public class Clash_Royale extends javax.swing.JFrame {
 
     private void bt_ingresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_ingresarMouseClicked
         // TODO add your handling code here:
-                String usuario,contra;
+        String usuario,contra;
         usuario=tf_usuario.getText();
         contra=pf_password.getText();
         int pos=0;
@@ -615,7 +636,7 @@ public class Clash_Royale extends javax.swing.JFrame {
 
     private void bt_adicionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_adicionarMouseClicked
         // TODO add your handling code here:
-        String nombre, estilo;
+        String nombre, estilo,tipo="";
         int daño,vida,mazo;
         
         estilo=cb_carta.getSelectedItem().toString();
@@ -623,11 +644,93 @@ public class Clash_Royale extends javax.swing.JFrame {
         daño=(Integer)sp_dano.getValue();
         vida=(Integer)sp_vida.getValue();
         mazo=(Integer)sp_mazo.getValue();
+        DefaultTreeModel modeloArbol = (DefaultTreeModel)jt_mazos.getModel();
+        DefaultMutableTreeNode raiz= (DefaultMutableTreeNode) modeloArbol.getRoot();
         
         if(estilo.equals("Minipekka"))
         {
             Minipekka m=new Minipekka("Alta", "Especial", "Terrestres", 4, nombre, daño, vida);
+            usuario_actual.getMazo().get(mazo).getCarta().add(m);
+            tipo="Especial";
+            carta_agregar=m;
         }
+        if(estilo.equals("Montapuerco"))
+        {
+            Montapuerco m=new Montapuerco("Alta", "Especial", "Terrestres", 4, nombre, daño, vida);
+            usuario_actual.getMazo().get(mazo).getCarta().add(m);
+            tipo="Especial";
+            carta_agregar=m;
+        }
+        if(estilo.equals("Leñador"))
+        {
+            Leñador m=new Leñador("Alta", "Legendaria", "Terrestres", 4, nombre, daño, vida);
+            usuario_actual.getMazo().get(mazo).getCarta().add(m);
+            tipo="Legendaria";
+            carta_agregar=m;
+        }
+        if(estilo.equals("Dragon Infernal"))
+        {
+            Dragon_infernal m=new Dragon_infernal("Media", "Legendaria", "Aereos", 4, nombre, daño, vida);
+            usuario_actual.getMazo().get(mazo).getCarta().add(m);
+            tipo="Legendaria";
+            carta_agregar=m;
+        }
+        if(estilo.equals("Golem"))
+        {
+            Golem m=new Golem("Baja", "Epica", "Terrestres", 8, nombre, daño, vida);
+            usuario_actual.getMazo().get(mazo).getCarta().add(m);
+            tipo="Epica";
+            carta_agregar=m;
+        }
+        if(estilo.equals("Dragon"))
+        {
+            Dragon m=new Dragon("Media", "Epica", "Aereos", 4, nombre, daño, vida);
+            usuario_actual.getMazo().get(mazo).getCarta().add(m);
+            tipo="Epica";
+            carta_agregar=m;
+        }
+        if(estilo.equals("Gigante Noble"))
+        {
+            Gigante_Noble m=new Gigante_Noble("Media", "Comun", "Terrestres", 6, nombre, daño, vida);
+            usuario_actual.getMazo().get(mazo).getCarta().add(m);
+            tipo="Comun";
+            carta_agregar=m;
+        }
+        if(estilo.equals("Pandilla de Duandes"))
+        {
+            Pandilla_Duendes m=new Pandilla_Duendes("Alta", "Comun", "Aereos", 4, nombre, daño, vida);
+            usuario_actual.getMazo().get(mazo).getCarta().add(m);
+            tipo="Comun";
+            carta_agregar=m;
+        }
+        int size=usuario_actual.getMazo().get(mazo).getCarta().size();
+        boolean flag=true;
+        if(size>3)
+        {
+            flag=false;
+        }
+        int centinela=-1;
+        for (int i = 0; i < raiz.getChildAt(mazo).getChildCount(); i++) 
+        {
+            if(raiz.getChildAt(mazo).getChildAt(i).equals(tipo)&&flag)
+            {
+                DefaultMutableTreeNode p = new DefaultMutableTreeNode(new Carta(nombre,daño,vida));
+                ((DefaultMutableTreeNode) raiz.getChildAt(mazo).getChildAt(i)).add(p);
+                centinela=1;
+            }
+        }
+        if(centinela==-1&&flag)
+            {
+                DefaultMutableTreeNode n = new DefaultMutableTreeNode(tipo);
+                DefaultMutableTreeNode p= new DefaultMutableTreeNode(new Carta(nombre,daño,vida));
+                n.add(p);
+                ((DefaultMutableTreeNode)raiz.getChildAt(mazo)).add(n);
+            }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Ya no se pueden agregar cartas a este mazo");
+        }
+            modeloArbol.reload();
     }//GEN-LAST:event_bt_adicionarMouseClicked
 
     /**

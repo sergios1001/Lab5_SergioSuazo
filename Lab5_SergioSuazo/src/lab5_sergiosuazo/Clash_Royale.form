@@ -446,9 +446,9 @@
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="sp_dano" pref="47" max="32767" attributes="0"/>
+                                  <Component id="sp_dano" max="32767" attributes="0"/>
                                   <Component id="sp_vida" max="32767" attributes="0"/>
-                                  <Component id="sp_mazo" max="32767" attributes="0"/>
+                                  <Component id="sp_mazo" pref="47" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -592,6 +592,12 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JSpinner" name="sp_mazo">
+              <Properties>
+                <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                  <SpinnerModel initial="0" maximum="2" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

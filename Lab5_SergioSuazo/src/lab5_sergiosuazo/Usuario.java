@@ -10,7 +10,7 @@ public class Usuario {
     private int edad;
     private Color color;
     private Date fecha;
-    private ArrayList<Carta> mazo=new ArrayList();
+    private ArrayList<Mazo> mazo=new ArrayList();
 
     public Usuario() {
     }
@@ -81,11 +81,11 @@ public class Usuario {
         this.fecha = fecha;
     }
 
-    public ArrayList<Carta> getMazo() {
+    public ArrayList<Mazo> getMazo() {
         return mazo;
     }
 
-    public void setMazo(ArrayList<Carta> mazo) {
+    public void setMazo(ArrayList<Mazo> mazo) {
         this.mazo = mazo;
     }
 
